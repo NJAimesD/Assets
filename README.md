@@ -1,6 +1,13 @@
 # efficent_portfolio
 This is a repository for performing ML experiments with efficent portfolios
 
+## Getting Started
+
+1. Install Python
+2. Donwload pip and virtualenv library
+3. Create your virtual environment with: python3 -m venv your_environment_name
+4. run: pip install -r requirements.txt
+
 README
 
 Self-balancing efficient portafolio: 

@@ -11,6 +11,7 @@ Data Science Scope:
 * Time series
 * Linear Regression
 * Normality test
+* Linear Optimization
 
 Skills requiered to develop
 * Statistics

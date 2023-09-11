@@ -17,7 +17,7 @@ Skills requiered to develop
 * Finance Investment Basics
 * Python libraries: Pandas, Numpy, yfinance
 * Supervised Learning. 
-* Cloud: Streaming and containerzation.
+* Cloud: Batch Processing / Near Real Time and Containerzation.
 
 Steps
 * Create a model that downloads daily stock quotes from the market

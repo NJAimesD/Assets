@@ -1,0 +1,98 @@
+#Frontera eficiente ML
+
+#Pasar codigo de frontera eficiente de R a Python
+
+#el paquete de python trae la columna adjusted?
+
+#Puntos a tratar
+
+#Sacar una ticket list dinamica del sp500 o el nasdaq
+getSymbols(Symbols=tickers.list, from="2015-01-01",
+periodicity="monthly", to="2020-03-10", src="yahoo")
+
+#generar un df unico enorme en base a los tickers
+tickers.zoo <- merge(AAPL, GE)
+prices.zoo <- Ad(merge(p1, p2, p3, p4))
+#el ad es solo para usar la columna adjusted
+
+#Sacar el rendimiento (compounded return)
+#esto lo esta aplicando a todas las columnas del df
+#THE DIFFERENCE IN LOG PRICES FOR ASSET I
+returns.zoo <- diff(log(prices.zoo))
+
+# Use the -1 to generate the geometric mean return 
+ER <- exp(apply(returns.zoo, 2, mean, na.rm=TRUE))-1
+
+ER2 <- exp(colMeans(na.omit(returns.zoo)))-1
+print(ER2)
+
+
+  #PARA SACAR EL RIESGO NECESITAMOS
+
+
+EVARPORT <- t(W)%*%COV%*%W
+print(EVARPORT)
+
+# We select diagonal because those are the variances of the portfolios 
+# By applying the st.dev. to those variances you now the risk for each portfolio
+ERISK <- sqrt(diag(EVARPORT))
+print(ERISK)
+
+
+# Generate the covariance 
+Covariance <- cov(returns.ma)
+print(Covariance)
+
+# Generate the correlation 
+Correlation <- cor(returns.ma)
+print(Correlation)
+
+###Generar las proporciones de cada stock en el portafolio
+
+# Obtain the Expected Returns for each stock 
+ER <- exp(apply(returns.ma,2,FUN = mean))-1
+print(ER)
+
+# Instead of 11, we create 19 portfolios. WE INCLUDING SHORT SELLING. 
+w1 <- seq(from=-.40, to=1.40, by=.10 )
+w2 <- 1 - w1
+Weights <- as.data.frame(cbind(w1,w2))
+
+# Generate the Expected Return of the Portfolio 
+PEReturns <- Weights$w1*ER[1]+ Weights$w2*ER[2]
+print(PEReturns)
+
+# Generate the Expected Variance of the Portfolio 
+PEV <- Weights$w1^2*Covariance[1,1]+Weights$w2^2*Covariance[2,2]+2*Weights$w1*Weights$w2*Covariance[1,2]
+print(PEV)
+
+# Obtain the Expected Risk of the Portfolio
+PERisk <- sqrt(PEV)
+print(PERisk)
+  
+
+
+#WS-4
+
+
+getSymbols(Symbol = "ALSEA.MX", src = "yahoo",
+from = "2012-01-01")
+
+#ESTO A SU VEZ YA CREA UN OBJETO
+
+names(`ALSEA.MX`)
+#MUESTRA LAS COLUMNAS
+#EN R SE GUARDA DIRECTAMENTE COMO UN DF
+
+index(`ALSEA.MX`)[1]
+#VER PRIMERA POSICION DEL DF, INDEX 1
+
+## [1] "ALSEA.MX.Open" "ALSEA.MX.High" "ALSEA.MX.Low"
+## [4] "ALSEA.MX.Close" "ALSEA.MX.Volume" "ALSEA.MX.Adjusted"
+#COLUMNAS QUE TRAEN
+
+tickers.zoo <- merge(AAPL, GE)
+#UNIMOS LOS DF
+
+summary(ALSEA.df)
+#SUMMARY STATISTICS, BASIC ONES, MIN, MAX, ETC

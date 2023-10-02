@@ -1,0 +1,57 @@
+ML Proyect
+
+##pip install yfinance
+
+import pandas as pd
+import yfinance as yf
+import numpy as np
+
+GetFacebookInformation = yf.Ticker("META")
+print(GetFacebookInformation.history(period="3d"))
+#esta manera sirve pero no tiene el precio ajustado
+
+datameta = yf.download("META", start='2021-01-01')
+preciometadf = datameta.drop(["Open","Low","Close","High", "Volume"], axis = 1)
+print(preciometadf)
+
+dataappl= yf.download("AAPL", start='2021-01-01')
+precioappldf = dataappl.drop(["Open","Low","Close","High", "Volume"], axis = 1)
+print(precioappldf)
+
+listcandidates = ['META','AMZN', 'NVDA']
+data1= yf.download(listcandidates, start='2021-01-01')
+precio1 = data1.drop(["Open","Low","Close","High", "Volume"], axis = 1)
+print(precio1)
+
+def list_wikipedia_sp500() -> pd.DataFrame:
+    # Ref: https://stackoverflow.com/a/75845569/
+    url = 'https://en.m.wikipedia.org/wiki/List_of_S%26P_500_companies'
+    return pd.read_html(url, attrs={'id': 'constituents'}, index_col='Symbol')[0]
+
+df = list_wikipedia_sp500()
+#df.head()
+
+symbolslist = df.index.to_list()
+#type(symbolslist)
+
+#some_list.remove(value)
+
+symbolslist.remove("BRK.B")
+symbolslist.remove("BF.B")
+#MANUALLY REMOVED THE TWO TICKERS THAT WERE NOT AVAILABLE FOR DOWNLOAD
+
+SPInfo = yf.download(symbolslist, start = '2021-01-01')
+
+SPPrices = SPInfo.drop(["Open","Low","Close","High", "Volume"], axis = 1)
+
+returnslog = np.log(SPPrices)
+#calculates the natural log
+
+#print(returnslog)
+
+returns = returnslog.diff()
+
+#it shows the difference between to consecutive values
+
+#print(returns)
+

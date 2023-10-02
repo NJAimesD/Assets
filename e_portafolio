@@ -57,6 +57,27 @@ expectedreturn = (np.exp(cretunrsmeandf))-1
 print(expectedreturn)
 type(expectedreturn)
 
-#calcualate risk per stock
+#calcualate risk(std dev) per stock
+risk1 = compoundedreturns.std()
+print(risk1)
+
+#SELECT 10 STOCKS
+
+#Generar portafolios 
+#Generar matriz de pesos
+print (np.random.dirichlet(np.ones(10)*1000.,size=1))
+weights = np.ones((10, 10))
+
+#expected return of portfolio
+    #weights * expected return
+
+
+#expected risk of portfololio
+    #expected variance port = transpose weight*cov matrix*weights
+    #e risk = square root(diagonale del e variance port)
+
+portfolio.optim in r
+
+
 
 

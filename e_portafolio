@@ -92,7 +92,7 @@ erp = highexreturn.multiply(wmatrix)
     #e risk = square root(diagonale del e variance port)
 
 
-portfolio.optim in r
+portfolio.optim in r - tseries package
 
 
 

@@ -89,7 +89,7 @@ def list_wikipedia_sp500() -> pd.DataFrame:
     url = 'https://en.m.wikipedia.org/wiki/List_of_S%26P_500_companies'
     return pd.read_html(url, attrs={'id': 'constituents'}, index_col='Symbol')[0]
 
-ASSETS_COUNT = 20
+ASSETS_COUNT = 2
 
 if __name__ == "__main__":
 
@@ -103,7 +103,9 @@ if __name__ == "__main__":
     symbolslist = symbolslist[:ASSETS_COUNT - 1] + ['AAPL']
 
     SPInfo = yf.download(symbolslist, start = '2021-01-01')
+    
     print("Data Downloadede Successfully!")
+    
     SPPrices = SPInfo.drop(["Open","Low","Close","High", "Volume"], axis = 1).fillna(.5)
     returnslog = np.log(SPPrices)
     compoundedreturns = returnslog.diff()
@@ -112,64 +114,10 @@ if __name__ == "__main__":
     cretunrsmeandf = cretunrsmean.to_frame()
     expectedreturn = (np.exp(cretunrsmeandf)) - 1
 
-    mweights = createweightmatrix(ASSETS_COUNT)
+    #mweights = createweightmatrix(ASSETS_COUNT)
     expectedreturn = expectedreturn.rename({0: 'expected return per stock'}, axis=1)
     highexreturn = expectedreturn['expected return per stock']
     highexreturn = pd.DataFrame(highexreturn,columns = ['expected return per stock'])
 
-
-    print("Expected Returns: ")
-    print(highexreturn.head(10))
-    
-    print("Portfolios ")
-    print(mweights)
-
-    print("Expected returns computed successfully!")
-
-    erp = np.matmul(mweights, highexreturn.values)
-
-    print(erp)
     covreturns = compoundedreturns.cov()
     print(covreturns)
-
-    variances = []
-
-    for portfolio in mweights.iterrows():
-        portfolio_variance = np.sqrt(
-                np.matmul(
-                    np.matmul(
-                    np.array(portfolio[1]), 
-                    covreturns
-                ),
-                np.array(portfolio[1]).T
-            )
-        )
-
-        variances.append(portfolio_variance)
-
-
-    print(variances)
-
-    fig, ax = plt.subplots(
-        figsize=(10, 10),
-        dpi=180
-    )
-    erp = [x[0] for x in erp.values]
-
-    print(erp)
-
-    fig, ax = plt.subplots(
-        dpi=180, figsize=(10, 10)
-    )
-
-    ax.set_facecolor("white")
-
-    ax.scatter(
-        variances, erp, color='darkblue'
-    )
-
-    plt.savefig(
-        "markowitz.png"
-    )
-
-    plt.show()

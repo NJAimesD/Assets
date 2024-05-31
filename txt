@@ -11,6 +11,8 @@ git checkout -b (your name)_branch or git branch (your name)_branch
 
 to check in which branch you are you can do git branch
 
+pip install --upgrade pip
+pip install -r .\requirements.txt
 Change anything needed
 
 git status to see changes made
@@ -25,5 +27,3 @@ Go to github repo and press the button pull request
 
 
 
-pip install --upgrade pip
-pip install -r .\requirements.txt

@@ -1,4 +1,4 @@
-git clone [DIRECCIÓN HTTPS]
+git clone https://github.com/ardc-cloud-and-big-data/efficent_portfolio.git
 
 git remote
 

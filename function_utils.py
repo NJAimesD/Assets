@@ -211,7 +211,7 @@ class PortfolioManager:
         
         ax.scatter(
             self._base_portfolio.get_variance(),
-            self._min_returns + [self._base_portfolio.get_return() * (self._max_returns-self._min_returns)],
+            self._base_portfolio.get_return(),
             color='darkred',
             label='Base Portfolio'
         )

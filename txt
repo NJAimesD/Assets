@@ -1,0 +1,29 @@
+git clone https://github.com/ardc-cloud-and-big-data/efficent_portfolio.git
+
+git remote
+
+git pull origin prod
+
+git checkout prod
+
+git checkout -b (your name)_branch or git branch (your name)_branch
+(if used git branch youll need to change branch so do git checkout (your name)_branch)
+
+to check in which branch you are you can do git branch
+
+pip install --upgrade pip
+pip install -r .\requirements.txt
+Change anything needed
+
+git status to see changes made
+
+if your program is working you can send it to git now
+git add (filename)
+git commit -m "(yourname)_GitPractice : (sumary changes made)"
+git push origin (your name)_branch
+
+
+Go to github repo and press the button pull request
+
+
+

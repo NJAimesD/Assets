@@ -2,3 +2,5 @@ virtualenv
 pandas
 numpy
 yfinance
+matplotlib
+scipy
